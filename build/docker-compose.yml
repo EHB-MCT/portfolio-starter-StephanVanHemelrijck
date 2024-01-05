@@ -1,0 +1,27 @@
+version: "3.2"
+
+services:
+  api:
+    build: ./images/api
+    container_name: api
+    ports:
+      - 80:3000
+    volumes:
+      - ./images/api/src:/usr/app/src
+    env_file:
+      - ./cfg/.env.dev
+    environment:
+      NODE_ENV: "development"
+    restart: on-failure
+
+  store:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./cfg/.env.dev
+    environment:
+      PG_CONNECTION_STRING: "postgres://$PG_USER:$PG_PASSWORD@store:5432/$PG_DB"
+    volumes:
+      - ./_backup:/var/lib/postgresql/data
