@@ -6,7 +6,7 @@ const knex = require("knex")(require("../../knexfile").development);
  * @returns {Promise<Array<Object>>} - Promise resolving to an array of users
  */
 const getUsers = async () => {
-  return knex("users").select("*");
+  return knex("games").orderBy("id").select("*");
 };
 
 /**
