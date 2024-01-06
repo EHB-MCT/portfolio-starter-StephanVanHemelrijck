@@ -17,6 +17,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/api/users", require("./routes/users"));
+app.use("/api/games", require("./routes/games"));
 
 /**
  * GET endpoint, providing hello world

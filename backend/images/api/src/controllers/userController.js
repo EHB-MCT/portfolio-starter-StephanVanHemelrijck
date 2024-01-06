@@ -34,9 +34,18 @@ const getUserById = async (req, res) => {
 };
 
 /**
+ * Represents a user object
+ *
+ * @typedef {Object} User
+ * @property {string} username.required - Username
+ * @property {string} email.required - Email
+ * @property {string} password.required - Password
+ */
+
+/**
  * Create user
  *
- *
+ * @param {Object} User - User data
  * @returns {Object} - The created user
  */
 const createUser = async (req, res) => {
@@ -81,6 +90,7 @@ const createUser = async (req, res) => {
 /**
  * Update user by id
  *
+ * @param {number} id - user id
  * @returns {Object} - The updated user
  */
 const updateUserById = async (req, res) => {
