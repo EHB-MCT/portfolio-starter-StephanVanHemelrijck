@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:express": "node index.js",
-    "start": "nodemon -L src/index.js"
+    "start": "nodemon -L src/index.js",
+    "migrate": "npx knex migrate:latest",
+    "seed": "npx knex seed:run",
+    "dev": "npm run migrate && npm run seed && npm run start"
   },
   "author": "Stephan Van Hemelrijck",
   "license": "ISC",
