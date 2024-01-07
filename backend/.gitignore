@@ -2,5 +2,5 @@
 /images/api/node_modules
 
 # config
-/cfg
+/cfg/.env.dev
 

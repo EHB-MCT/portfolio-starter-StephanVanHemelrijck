@@ -13,11 +13,15 @@ services:
     environment:
       NODE_ENV: "development"
     restart: on-failure
+    depends_on:
+      store:
+        condition: service_healthy
+    command: npm run dev
 
   store:
-    image: postgres:latest
     container_name: store
-    restart: always
+    image: postgres:latest
+    restart: on-failure
     ports:
       - 5432:5432
     env_file:
@@ -26,6 +30,11 @@ services:
       PG_CONNECTION_STRING: postgres://$PG_USER:$PG_PASSWORD@store:5432/$PG_DB
     volumes:
       - ./_backup:/var/lib/postgresql/data
+    healthcheck: # healthcheck for postgres to verify database is ready
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s # check every 10 seconds
+      retries: 5 # 5 times before marked as unhealthy
+      start_period: 20s # postgres takes a bit to start up
 
 volumes:
   _backup:
